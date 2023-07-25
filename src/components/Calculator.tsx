@@ -1,8 +1,14 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useContext } from "react";
+import { ThemeContext } from "../layout/Layout";
+
+const DEFAULT_PACE = 0;
 
 const Calculator = () => {
-  const [pace, setPace] = useState((5.3).toFixed(2));
+  const [pace, setPace] = useState(DEFAULT_PACE.toFixed(2));
   const [distance, setDistance] = useState(10);
+  const theme = useContext(ThemeContext);
+
+  console.log({ theme });
 
   const handlePaceChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPace(Number.parseFloat(e.target.value).toFixed(2));
@@ -27,17 +33,24 @@ const Calculator = () => {
   };
 
   return (
-    <div>
-      <label htmlFor="pace">
-        Allure moyenne (min/sec) :
-        <input
-          name="pace"
-          type="number"
-          step=".01"
-          onChange={handlePaceChange}
-          value={pace}
-        />
-      </label>
+    <div className="justify-center">
+      <div className="max-w-xs m-auto">
+        <label
+          htmlFor="pace"
+          className="block text-xs font-medium text-gray-200"
+        >
+          Allure moyenne (min / sec) :
+          <input
+            name="pace"
+            type="number"
+            step=".01"
+            onChange={handlePaceChange}
+            value={pace}
+            className="text-center text-5xl mb-10 mt-1 w-full rounded-md shadow-sm border-gray-700 bg-gray-800 text-white"
+          />
+        </label>
+      </div>
+
       <p>Temps estimé sur 5 km : {calculateEstimatedTime(pace, 5)}</p>
       <p>Temps estimé sur 10 km : {calculateEstimatedTime(pace, 10)}</p>
       <p>
