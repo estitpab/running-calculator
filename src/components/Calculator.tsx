@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, useContext } from "react";
 import { ThemeContext } from "../layout/Layout";
+import clsx from "clsx";
 
 const DEFAULT_PACE = 0;
 
@@ -7,6 +8,7 @@ const Calculator = () => {
   const [pace, setPace] = useState(DEFAULT_PACE.toFixed(2));
   const [distance, setDistance] = useState(10);
   const theme = useContext(ThemeContext);
+  const lightTheme = theme === "light";
 
   console.log({ theme });
 
@@ -37,7 +39,7 @@ const Calculator = () => {
       <div className="max-w-xs m-auto">
         <label
           htmlFor="pace"
-          className="block text-xs font-medium text-gray-200"
+          className={`block text-xs font-medium text-gray-200 ${clsx(lightTheme && 'text-gray-900')}`}
         >
           Allure moyenne (min / sec) :
           <input
@@ -46,7 +48,12 @@ const Calculator = () => {
             step=".01"
             onChange={handlePaceChange}
             value={pace}
-            className="text-center text-5xl mb-10 mt-1 w-full rounded-md shadow-sm border-gray-700 bg-gray-800 text-white"
+            className={`text-center text-5xl mb-10 mt-1 w-full rounded-md shadow-sm border-gray-700 "bg-gray-800 bg-gray-800 text-white ${clsx(
+              lightTheme && [
+                "bg-gray-200",
+                "text-gray-900"
+              ]
+            )}`}
           />
         </label>
       </div>
