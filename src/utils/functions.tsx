@@ -5,10 +5,11 @@ export const calculateEstimatedTime = (pace: string, distanceInKm: number) => {
   const timeInHours = Math.floor(timeInSeconds / 3600);
   const remainingSeconds = Math.floor(timeInSeconds % 60);
 
-  if (timeInHours > 0) {
-    //TODO: Masquer les secondes si 0 (ex à 5,00)
-    return `${timeInHours} h ${timeInMinutes} min ${remainingSeconds} s`;
-  } else {
-    return `${timeInMinutes} min ${remainingSeconds} s`;
-  }
+  let resultText = "";
+
+  if (timeInHours > 0) resultText += `${timeInHours} h `;
+  if (timeInMinutes > 0) resultText += `${timeInMinutes} min `;
+  if (remainingSeconds > 0) resultText += `${remainingSeconds} s`;
+
+  return resultText || '-';
 };
