@@ -23,7 +23,7 @@ const Layout = ({ children }: Props) => {
           lightTheme && ["bg-white", "text-gray-900"]
         )}`}
       >
-        <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
+        <div className="mx-auto max-w-screen-xl px-4 py-10 lg:flex lg:h-screen lg:items-center">
           <div
             className={`mx-auto max-w-3xl text-center ${
               lightTheme ? "text-gray-900" : "text-white"
