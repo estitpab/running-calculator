@@ -1,13 +1,12 @@
 import { useState } from "react";
 
 import TimeBlock from "./TimeBlock";
-import SlideBlock from "./SlideBlock";
+//import SlideBlock from "./SlideBlock";
 import PaceSelector from "./PaceSelector";
-
-const DEFAULT_PACE = 5.30;
+import { DEFAULT_MINUTES_PACE } from "../utils/variables";
 
 const Calculator = () => {
-  const [pace, setPace] = useState(DEFAULT_PACE.toFixed(2));
+  const [pace, setPace] = useState(String(DEFAULT_MINUTES_PACE * 60));
 
   return (
     <div className="justify-center">
@@ -23,9 +22,9 @@ const Calculator = () => {
         <TimeBlock distance={21.1} pace={pace} note="semi-marathon" />
         <TimeBlock distance={42.195} pace={pace} note="marathon" />
       </section>
-      <section className="mt-8">
+      {/* <section className="mt-8">
         <SlideBlock pace={pace} />
-      </section>
+      </section> */}
     </div>
   );
 };
