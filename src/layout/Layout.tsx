@@ -19,22 +19,14 @@ const Layout = ({ children }: Props) => {
   return (
     <ThemeContext.Provider value={theme}>
       <section
-        className={`bg-gray-900 text-white ${clsx(
-          lightTheme && ["bg-white", "text-gray-900"]
+        className={`${clsx(
+          lightTheme ? "bg-white text-gray-900" : "bg-gray-900 text-white"
         )}`}
       >
         <div className="mx-auto max-w-screen-xl px-4 py-10 lg:flex lg:h-screen lg:items-center">
-          <div
-            className={`mx-auto max-w-3xl text-center ${
-              lightTheme ? "text-gray-900" : "text-white"
-            }`}
-          >
-            {children}
-          </div>
+          <div className="mx-auto max-w-3xl text-center">{children}</div>
         </div>
-        <button
-          className={`${lightTheme ? "text-gray-900" : "text-white"}`}
-          onClick={handleThemeChange}
+        <button onClick={handleThemeChange}
         >
           Afficher le thème {theme === "dark" ? "light" : "dark"}
         </button>

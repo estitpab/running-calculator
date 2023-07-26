@@ -38,8 +38,10 @@ const Calculator = () => {
             step="0.01"
             onChange={handlePaceChange}
             value={pace}
-            className={`text-center text-5xl mb-10 mt-1 w-full rounded-md shadow-sm border-gray-700 bg-gray-800 text-white ${clsx(
-              lightTheme && ["bg-gray-200", "text-gray-900"]
+            className={`text-center text-5xl mb-10 mt-1 w-full rounded-md shadow-sm border-gray-700 ${clsx(
+              lightTheme
+                ? "bg-gray-200 text-gray-900"
+                : "bg-gray-800 text-white"
             )}`}
           />
         </label>
