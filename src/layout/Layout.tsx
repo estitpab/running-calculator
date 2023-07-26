@@ -23,10 +23,10 @@ const Layout = ({ children }: Props) => {
           lightTheme ? "bg-white text-gray-900" : "bg-gray-900 text-white"
         )}`}
       >
-        <div className="mx-auto max-w-screen-xl px-4 py-10 lg:flex lg:h-screen lg:items-center">
+        <div className="mx-auto max-w-screen-xl px-4 py-10 flex h-screen items-center">
           <div className="mx-auto max-w-3xl text-center">{children}</div>
         </div>
-        <button onClick={handleThemeChange}
+        <button onClick={handleThemeChange} className=" absolute bottom-1 left-1"
         >
           Afficher le thème {theme === "dark" ? "light" : "dark"}
         </button>
