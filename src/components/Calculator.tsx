@@ -4,7 +4,7 @@ import TimeBlock from "./TimeBlock";
 import SlideBlock from "./SlideBlock";
 import PaceSelector from "./PaceSelector";
 
-const DEFAULT_PACE = 5.3;
+const DEFAULT_PACE = 5.30;
 
 const Calculator = () => {
   const [pace, setPace] = useState(DEFAULT_PACE.toFixed(2));

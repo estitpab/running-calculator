@@ -31,9 +31,19 @@ const PaceSelector = ({ pace, setPace }: Props) => {
           step="0.01"
           onChange={handlePaceChange}
           value={pace}
-          className={`text-center text-5xl mb-10 mt-1 w-full rounded-md shadow-sm border-gray-700 ${clsx(
+          className={`text-center text-5xl mb-2 mt-1 w-full rounded-md shadow-sm border-gray-700 ${clsx(
             lightTheme ? "bg-gray-200 text-gray-900" : "bg-gray-800 text-white"
           )}`}
+        />
+        <input
+          type="range"
+          name="pace"
+          min="4.00"
+          max="7.00"
+          step="0.01"
+          value={pace}
+          onChange={handlePaceChange}
+          className=" w-full mb-10"
         />
       </label>
     </div>
