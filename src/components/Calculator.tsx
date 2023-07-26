@@ -1,8 +1,10 @@
 import { useState, ChangeEvent, useContext } from "react";
 import { ThemeContext } from "../layout/Layout";
 import clsx from "clsx";
+import TimeBlock from "./TimeBlock";
+import { calculateEstimatedTime } from "../utils/functions";
 
-const DEFAULT_PACE = 0;
+const DEFAULT_PACE = 5.3;
 
 const Calculator = () => {
   const [pace, setPace] = useState(DEFAULT_PACE.toFixed(2));
@@ -10,28 +12,14 @@ const Calculator = () => {
   const theme = useContext(ThemeContext);
   const lightTheme = theme === "light";
 
-  console.log({ theme });
-
   const handlePaceChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPace(Number.parseFloat(e.target.value).toFixed(2));
+    if (e.target.value.length < 5) {
+      setPace(e.target.value);
+    }
   };
 
   const handleDistanceChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDistance(Number(e.target.value));
-  };
-
-  const calculateEstimatedTime = (pace: string, distanceInKm: number) => {
-    const paceInSeconds = Number(pace) * 60;
-    const timeInSeconds = paceInSeconds * distanceInKm;
-    const timeInMinutes = Math.floor((timeInSeconds % 3600) / 60);
-    const timeInHours = Math.floor(timeInSeconds / 3600);
-    const remainingSeconds = Math.floor(timeInSeconds % 60);
-
-    if (timeInHours > 0) {
-      return `${timeInHours} h ${timeInMinutes} min ${remainingSeconds} s`;
-    } else {
-      return `${timeInMinutes} min ${remainingSeconds} s`;
-    }
   };
 
   return (
@@ -39,35 +27,35 @@ const Calculator = () => {
       <div className="max-w-xs m-auto">
         <label
           htmlFor="pace"
-          className={`block text-xs font-medium text-gray-200 ${clsx(lightTheme && 'text-gray-900')}`}
+          className={`block text-xs font-medium text-gray-200 ${clsx(
+            lightTheme && "text-gray-900"
+          )}`}
         >
           Allure moyenne (min / sec) :
           <input
             name="pace"
             type="number"
-            step=".01"
+            step="0.01"
             onChange={handlePaceChange}
             value={pace}
             className={`text-center text-5xl mb-10 mt-1 w-full rounded-md shadow-sm border-gray-700 "bg-gray-800 bg-gray-800 text-white ${clsx(
-              lightTheme && [
-                "bg-gray-200",
-                "text-gray-900"
-              ]
+              lightTheme && ["bg-gray-200", "text-gray-900"]
             )}`}
           />
         </label>
       </div>
 
-      <p>Temps estimé sur 5 km : {calculateEstimatedTime(pace, 5)}</p>
-      <p>Temps estimé sur 10 km : {calculateEstimatedTime(pace, 10)}</p>
-      <p>
-        Temps estimé sur un semi-marathon (21,1 km) :{" "}
-        {calculateEstimatedTime(pace, 21.1)}
-      </p>
-      <p>
-        Temps estimé sur un marathon (42,195 km) :{" "}
-        {calculateEstimatedTime(pace, 42.195)}
-      </p>
+      <h2>Calcul des temps estimés :</h2>
+
+      <section className="mt-8 grid grid-cols-3 gap-3 md:grid-cols-3 lg:grid-cols-3">
+        <TimeBlock distance={5} pace={pace} />
+        <TimeBlock distance={10} pace={pace} />
+        <TimeBlock distance={15} pace={pace} />
+      </section>
+      <section className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-2">
+        <TimeBlock distance={21.1} pace={pace} note="semi-marathon" />
+        <TimeBlock distance={42.195} pace={pace} note="marathon" />
+      </section>
 
       <div>
         <label htmlFor="distance">

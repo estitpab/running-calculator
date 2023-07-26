@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+    .title-gradient {
+        @apply bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 font-extrabold bg-clip-text text-transparent;
+    }
+}
