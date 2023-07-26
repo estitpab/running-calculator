@@ -19,7 +19,7 @@ const Layout = ({ children }: Props) => {
   return (
     <ThemeContext.Provider value={theme}>
       <section
-        className={`${clsx(
+        className={`min-h-screen ${clsx(
           lightTheme ? "bg-white text-gray-900" : "bg-gray-900 text-white"
         )}`}
       >
