@@ -1,12 +1,9 @@
-import { useContext, ChangeEvent, useState } from "react";
+import { useContext } from "react";
 import clsx from "clsx";
 import { ThemeContext } from "../layout/Layout";
-import {
-  DEFAULT_MINUTES_PACE,
-  MAX_MINUTES_PACE,
-  MIN_MINUTES_PACE,
-} from "../utils/variables";
+import { MAX_MINUTES_PACE, MIN_MINUTES_PACE } from "../utils/variables";
 import IncDecButton from "./IncDecButton";
+import { usePaceHandler } from "../hooks/usePaceHandler";
 
 interface Props {
   pace: string;
@@ -16,39 +13,8 @@ interface Props {
 const PaceSelector = ({ pace, setPace }: Props) => {
   const theme = useContext(ThemeContext);
   const lightTheme = theme === "light";
-  const [displayedPace, setDisplayedPace] = useState([DEFAULT_MINUTES_PACE, 0]);
-  const outputPace: string = `${displayedPace[0]}′${
-    displayedPace[1] < 10 ? "0" + displayedPace[1] : displayedPace[1]
-  }″`;
-
-  console.log("🎃 displayedPace", displayedPace);
-  console.log("🚀 pace", pace);
-
-  const updatePaceDisplay = (seconds: string) => {
-    const myDate: Date = new Date();
-    myDate.setMinutes(0, Number(seconds));
-
-    const outputMinutes: number = myDate.getMinutes();
-    const outputSeconds: number = myDate.getSeconds();
-
-    setDisplayedPace([outputMinutes, outputSeconds]);
-    setPace(seconds);
-  };
-
-  const handlePaceChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const seconds = e.target.value;
-    updatePaceDisplay(seconds);
-  };
-
-  const handleRemoveSecond = () => {
-    const seconds = String(Number(pace) - 1);
-    updatePaceDisplay(seconds);
-  };
-
-  const handleAddSecond = () => {
-    const seconds = String(Number(pace) + 1);
-    updatePaceDisplay(seconds);
-  };
+  const { handlePaceChange, handleRemoveSecond, handleAddSecond, outputPace } =
+    usePaceHandler(pace, setPace);
 
   return (
     <div className="max-w-xs m-auto">
