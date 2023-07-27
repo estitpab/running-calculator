@@ -14,7 +14,7 @@ export default defineConfig({
       includeAssets: ['running-calculator.svg', 'pwa-192x192.png', 'pwa-512x512'],
       manifest: {
         name: 'Running Calculator',
-        short_name: 'MyApp',
+        short_name: 'Running Calculator',
         description: 'My Awesome App description',
         theme_color: '#111826',
         icons: [
