@@ -1,6 +1,4 @@
 export const calculateEstimatedTime = (pace: string, distanceInKm: number) => {
-
-  console.log(pace);
   const paceInSeconds = Number(pace);
   const timeInSeconds = paceInSeconds * distanceInKm;
   const timeInMinutes = Math.trunc((timeInSeconds % 3600) / 60);

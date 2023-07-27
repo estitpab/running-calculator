@@ -12,7 +12,7 @@ const Calculator = () => {
     <div className="justify-center">
       <PaceSelector pace={pace} setPace={setPace} />
 
-      <h2>Calcul des temps estimés :</h2>
+      <h2>Temps de course estimé :</h2>
       <section className="mt-3 grid grid-cols-3 gap-3 md:grid-cols-3 lg:grid-cols-3">
         <TimeBlock distance={5} pace={pace} />
         <TimeBlock distance={10} pace={pace} />

@@ -6,6 +6,7 @@ import {
   MAX_MINUTES_PACE,
   MIN_MINUTES_PACE,
 } from "../utils/variables";
+import IncDecButton from "./IncDecButton";
 
 interface Props {
   pace: string;
@@ -20,8 +21,10 @@ const PaceSelector = ({ pace, setPace }: Props) => {
     displayedPace[1] < 10 ? "0" + displayedPace[1] : displayedPace[1]
   }″`;
 
-  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const seconds = e.target.value;
+  console.log("🎃 displayedPace", displayedPace);
+  console.log("🚀 pace", pace);
+
+  const updatePaceDisplay = (seconds: string) => {
     const myDate: Date = new Date();
     myDate.setMinutes(0, Number(seconds));
 
@@ -32,16 +35,34 @@ const PaceSelector = ({ pace, setPace }: Props) => {
     setPace(seconds);
   };
 
+  const handlePaceChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const seconds = e.target.value;
+    updatePaceDisplay(seconds);
+  };
+
+  const handleRemoveSecond = () => {
+    const seconds = String(Number(pace) - 1);
+    updatePaceDisplay(seconds);
+  };
+
+  const handleAddSecond = () => {
+    const seconds = String(Number(pace) + 1);
+    updatePaceDisplay(seconds);
+  };
+
   return (
     <div className="max-w-xs m-auto">
       <h2>Allure moyenne (min / km) :</h2>
-      <p
-        className={`text-center text-5xl p-3 mb-2 mt-1 w-full rounded-md border-gray-700 border border-solid ${clsx(
+
+      <div
+        className={`flex text-center justify-between text-5xl p-3 mb-2 mt-1 w-full rounded-md border-gray-700 border border-solid ${clsx(
           lightTheme ? "bg-gray-200 text-gray-900" : "bg-gray-800 text-white"
         )}`}
       >
-        {outputPace}
-      </p>
+        <IncDecButton handleOnClick={handleRemoveSecond} actionType="dec" />
+        <span>{outputPace}</span>
+        <IncDecButton handleOnClick={handleAddSecond} actionType="inc" />
+      </div>
       <label
         htmlFor="pace"
         className={`block text-xs font-medium text-gray-200 ${clsx(
@@ -54,7 +75,7 @@ const PaceSelector = ({ pace, setPace }: Props) => {
           step={1}
           min={MIN_MINUTES_PACE * 60}
           max={MAX_MINUTES_PACE * 60}
-          onChange={handleDateChange}
+          onChange={handlePaceChange}
           value={pace}
           hidden
         />
@@ -65,7 +86,7 @@ const PaceSelector = ({ pace, setPace }: Props) => {
           min={MIN_MINUTES_PACE * 60}
           max={MAX_MINUTES_PACE * 60}
           value={pace}
-          onChange={handleDateChange}
+          onChange={handlePaceChange}
           className=" w-full mb-10"
         />
       </label>
