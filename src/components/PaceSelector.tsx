@@ -21,7 +21,7 @@ const PaceSelector = ({ pace, setPace }: Props) => {
       <h2>Allure moyenne (min / km) :</h2>
 
       <div
-        className={`flex text-center justify-between text-5xl p-3 mb-2 mt-1 w-full rounded-md border-gray-700 border border-solid ${clsx(
+        className={`flex text-center justify-between text-5xl p-3 mb-2 mt-1 w-full rounded-md border-gray-700 border border-solid transition duration-500 ${clsx(
           lightTheme ? "bg-gray-200 text-gray-900" : "bg-gray-800 text-white"
         )}`}
       >

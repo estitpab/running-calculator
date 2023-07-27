@@ -1,5 +1,5 @@
 const Header = () => {
-  const pictoList = ["🏃‍♀️", "🏃", "🏃‍♂️"];
+  const pictoList = ["🏃‍♀️", "🏃", "🏃‍♂️","🏆"];
 
   const getRandomPicto = (arr: Array<string>) => {
     const randomIndex = Math.floor(Math.random() * arr.length);
